@@ -1,0 +1,192 @@
+<div class="container">
+    <h1>Welcome to Smart Helmet with Ambulance Support Project</h1><br><br>
+    <div class="row deviceid">
+        <div class="col-lg-6">Device Id</div>
+        <div class="col-lg-6">{{ Id }}</div>
+    </div>   <br><br>
+    <div *ngIf="isSaved" class="alert alert-success">
+        <h4>Thank You</h4>
+        <p>Now You can use the device</p>
+    </div>
+    <div *ngIf="!isSaved">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <h2>Enter Rider Details</h2>
+        <p>* Required</p>
+        <div formGroupName="riderDetails">
+            <div class="form-group">
+                <label for="riderName">Full Name*</label>
+                <input 
+                    formControlName="riderName" 
+                    id="riderName" 
+                    type="text" 
+                    class="form-control">
+                    <div class="alert alert-danger" 
+                        *ngIf="riderName.touched && riderName.invalid">
+                        <div *ngIf="riderName.errors.required">
+                            required
+                        </div>
+                        <div *ngIf="riderName.errors.minlength">
+                            minlength {{ riderName.errors.minlength.requiredLength }}
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="riderNumber">Phone Number*</label>
+                        <input 
+                            formControlName="riderNumber" 
+                            id="riderNumber" 
+                            type="tel" 
+                            class="form-control">
+                            <div class="alert alert-danger" 
+                                *ngIf="riderNumber.touched && !riderNumber.valid">
+                                <div *ngIf="riderNumber.errors.required">
+                                    required
+                                </div>
+                                <div *ngIf="riderNumber.errors.minlength">
+                                    minlength {{ riderNumber.errors.minlength.requiredLength }}
+                                </div>
+                                <div *ngIf="riderNumber.errors.maxlength">
+                                    maxlength {{ riderNumber.errors.maxlength.requiredLength }}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="riderEmail">Email*</label>
+                        <input 
+                            formControlName="riderEmail" 
+                            id="riderEmail" 
+                            type="email" 
+                            class="form-control">
+                            <div class="alert alert-danger" 
+                                *ngIf="riderEmail.touched && !riderEmail.valid">
+                                <div *ngIf="riderEmail.errors.required">
+                                    required
+                                </div>
+                                <div *ngIf="riderEmail.errors.email">
+                                    not a valid email
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label for="riderDob">Date of Birth*</label>
+                        <input 
+                            formControlName="riderDob" 
+                            id="riderDob" 
+                            type="date" 
+                            class="form-control">
+                            <div class="alert alert-danger" 
+                                *ngIf="riderDob.touched && !riderDob.valid">
+                                <div *ngIf="riderDob.errors.required">
+                                    required
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label for="riderGender">Gender*</label>
+                        <select formControlName="riderGender" id="riderGender" class="form-control">
+                            <option *ngFor="let type of gender" [ngValue]="type.name">{{type.name}}</option>
+                        </select>
+                            <div class="alert alert-danger" 
+                                *ngIf="riderGender.touched && !riderGender.valid">
+                                <div *ngIf="riderGender.errors.required">
+                                    required
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label for="riderBlood">Blood Group*</label>
+                        <select formControlName="riderBlood" id="riderBlood" class="form-control">
+                            <option *ngFor="let type of blood" [ngValue]="type.name">{{type.name}}</option>
+                        </select>
+                            <div class="alert alert-danger" 
+                                *ngIf="riderBlood.touched && !riderBlood.valid">
+                                <div *ngIf="riderBlood.errors.required">
+                                    required
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="riderAddress">Address*</label>
+                <input 
+                    formControlName="riderAddress" 
+                    id="riderAddress" 
+                    type="text" 
+                    class="form-control">
+                    <div class="alert alert-danger" 
+                        *ngIf="riderAddress.touched && !riderAddress.valid">
+                        <div *ngIf="riderAddress.errors.required">
+                            required
+                        </div>
+                        <div *ngIf="riderAddress.errors.minlength">
+                            minlength {{ riderAddress.errors.minlength.requiredLength }}
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <h2>For Emergency Contact</h2>
+        <div formGroupName="emergencyDetails">
+            <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="emergencyName">Full Name*</label>
+                            <input 
+                                formControlName="emergencyName"                                 
+                                id="emergencyName" 
+                                type="text" 
+                                class="form-control">
+                                <div class="alert alert-danger" 
+                                    *ngIf="emergencyName.touched && !emergencyName.valid">
+                                    <div *ngIf="emergencyName.errors.required">
+                                        required
+                                    </div>
+                                    <div *ngIf="emergencyName.errors.minlength">
+                                        minlength {{ emergencyName.errors.minlength.requiredLength }}
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="emergencyNumber">Phone Number*</label>
+                        <input 
+                            formControlName="emergencyNumber" 
+                            id="emergencyNumber" 
+                            type="tel" 
+                            class="form-control">
+                            <div class="alert alert-danger" 
+                                *ngIf="emergencyNumber.touched && !emergencyNumber.valid">
+                                <div *ngIf="emergencyNumber.errors.required">
+                                    required
+                                </div>
+                                <div *ngIf="emergencyNumber.errors.minlength">
+                                    minlength {{ emergencyNumber.errors.minlength.requiredLength }}
+                                </div>
+                                <div *ngIf="emergencyNumber.errors.maxlength">
+                                    maxlength {{ emergencyNumber.errors.maxlength.requiredLength }}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!--<p>{{ f.value | json }}</p>-->
+        <button class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+    </form>
+    </div>
+</div>
